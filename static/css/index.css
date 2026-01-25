@@ -1,0 +1,180 @@
+/* Основные стили */
+:root {
+    --primary: #4361ee;
+    --primary-dark: #3a56d4;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    padding-top: 76px;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Эффект для градиентного текста */
+h1 span.text-gradient {
+    /* Простой градиент для начала */
+    background: linear-gradient(45deg, #4361ee, #f72585);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 900;
+    position: relative;
+    display: inline-block;
+    padding: 0 5px;
+}
+
+
+
+/* Кнопки навигации */
+.navbar-nav .nav-link.active {
+    color: var(--primary) !important;
+    font-weight: 600;
+    position: relative;
+}
+
+.navbar-nav .nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 2px;
+    background-color: var(--primary);
+    border-radius: 1px;
+}
+
+/* Стили для кнопки Каталог экскурсий */
+    #start-purchase-btn {
+    background: var(--primary);
+    border: none;
+    border-radius: 8px;
+    padding: 15px 35px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+#start-purchase-btn:hover {
+    background: var(--primary-dark);
+    color: white;
+    text-decoration: none;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(67, 97, 238, 0.3);
+}
+
+/* Приветственный баннер */
+.welcome-banner {
+    margin-top: 56px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+}
+
+.welcome-banner h5 {
+    font-weight: 700;
+}
+
+
+/* Карточки */
+.card {
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* Секции */
+section {
+    padding: 4rem 0;
+}
+
+/* ФУТЕР*/
+footer.bg-dark {
+    background-color: #212529 !important;
+}
+
+footer .text-white-50 {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+footer .border-secondary {
+    border-color: #495057 !important;
+}
+
+.social-icon {
+    filter: none !important;
+    transition: all 0.3s ease !important;
+    border-radius: 50%; /* Сделает иконку круглой */
+    object-fit: cover; /* Для корректного отображения изображения */
+}
+
+.social-icon:hover {
+    opacity: 0.7;
+    transform: translateY(-3px);
+}
+
+.social-icons-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Адаптивность для футера */
+@media (max-width: 992px) {
+    footer .col-lg-4 {
+        margin-bottom: 2rem;
+    }
+
+    .social-icons-container {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .social-icon {
+        max-width: 28px !important;
+        width: 28px;
+    }
+
+    footer .input-group {
+        flex-direction: column;
+    }
+
+    footer .input-group .form-control {
+        border-radius: 0.375rem 0.375rem 0 0 !important;
+        margin-bottom: -1px;
+    }
+
+    footer .input-group .btn {
+        border-radius: 0 0 0.375rem 0.375rem !important;
+        width: 100%;
+    }
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    body {
+        padding-top: 66px;
+    }
+
+    .welcome-banner {
+        margin-top: 46px;
+        text-align: center;
+    }
+
+    .welcome-banner h5 {
+        font-size: 1.2rem;
+    }
+
+    section {
+        padding: 3rem 0;
+    }
+}
