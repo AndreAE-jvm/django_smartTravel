@@ -134,7 +134,7 @@ function djmigrate-reset {
     Write-Host "✅ Миграции events сброшены" -ForegroundColor Green
 }
 
-## Редактировать и синхронизировать
+## Редактировать и синхронизировать локальный и файл профиля
 function es {
     notepad $PROFILE
     Copy-Item $PROFILE "C:\IT\Python\django_project\smartTravel\Microsoft.PowerShell_profile.ps1" -Force
@@ -142,22 +142,6 @@ function es {
     Write-Host "✅ Синхронизировано" -ForegroundColor Green
 }
 
-# Редактировать и отправить на GitHub
-function ep {
-    notepad $PROFILE
-    Copy-Item $PROFILE "C:\IT\Python\django_project\smartTravel\Microsoft.PowerShell_profile.ps1" -Force
-    . $PROFILE
-    
-    cd C:\IT\Python\django_project\smartTravel
-    
-    # только файл профиля
-    git add Microsoft.PowerShell_profile.ps1
-    
-    git commit -m "Update profile $(Get-Date -Format 'HH:mm')"
-    git push
-    
-    Write-Host "✅ Отправлено на GitHub!" -ForegroundColor Green
-}
 
 
 function djh {
