@@ -1,8 +1,7 @@
 {% extends 'events/base.html' %}
 {% load static %}
 
-
-<!--    <title>Каталог экскурсий | Туристический гид</title>-->
+<!--{% block title %}{{ title }}{% endblock %}-->
 
 {% block css %}
 <!-- Кастомные стили -->
@@ -14,9 +13,7 @@
 <script src="{% static 'js/events.js' %}" defer></script>
 {% endblock %}
 
-
 {% block content %}
-<!--Page content  -->
 <main class="container py-4 mt-5">
     <!-- Заголовок и категории -->
     <div class="row mb-4">
@@ -25,24 +22,18 @@
 
             <!-- Фильтр по категориям -->
             <div class="d-flex flex-wrap gap-2 mb-3" id="categoryFilter">
-                <button class="btn btn-sm btn-primary category-btn" data-category="">
+                <!-- Кнопка "Все" -->
+                <button class="btn btn-primary category-btn active" data-category="all">
                     Все направления
                 </button>
-                <button class="btn btn-sm btn-outline-primary category-btn" data-category="city">
-                    Городские туры
+
+                <!-- Кнопки категорий -->
+                {% for category in categories %}
+                <button class="btn btn-outline-primary category-btn"
+                        data-category="{{ category.id }}">
+                    {{ category }}
                 </button>
-                <button class="btn btn-sm btn-outline-primary category-btn" data-category="nature">
-                    Природа
-                </button>
-                <button class="btn btn-sm btn-outline-primary category-btn" data-category="history">
-                    Исторические
-                </button>
-                <button class="btn btn-sm btn-outline-primary category-btn" data-category="food">
-                    Гастрономия
-                </button>
-                <button class="btn btn-sm btn-outline-primary category-btn" data-category="adventure">
-                    Приключения
-                </button>
+                {% endfor %}
             </div>
         </div>
 
@@ -77,193 +68,93 @@
         </div>
     </div>
 
-    <!-- Счетчик -->
-    <div class="alert alert-light border mb-4">
-        <i class="bi bi-info-circle me-2"></i>
-        Найдено: <span class="badge bg-primary" id="eventsCount">8</span> экскурсий
-    </div>
-
     <!-- Карточки экскурсий -->
     <div class="row g-4" id="eventsContainer">
-        <!-- Карточка 1 -->
-        <div class="col-lg-4 col-md-6">
+        {% for event in events %}
+        <div class="col-lg-4 col-md-6 event-card-container" data-category="{{ event.category.id }}">
             <div class="card event-card h-100" data-bs-toggle="modal" data-bs-target="#eventModal"
-                 data-event-id="1" data-category="city">
-                <img src="https://images.unsplash.com/photo-1511739001486-6bfe10ce785f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                     class="card-img-top" alt="Исторический центр Москвы">
-                <div class="card-body">
-                    <span class="badge bg-primary mb-2">Городские туры</span>
-                    <h5 class="card-title">Исторический центр Москвы</h5>
-                    <p class="card-text">Пешеходная экскурсия по Красной площади, Александровскому саду и старинным
-                        улочкам Москвы.</p>
-                    <div class="mt-auto">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <span class="h5 text-success mb-0">1 500 ₽</span>
-                                <small class="text-muted d-block">за человека</small>
-                            </div>
-                            <div class="text-end">
-                                <div><i class="bi bi-clock"></i> 3 часа</div>
-                                <div><i class="bi bi-people"></i> до 15 чел.</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                 data-event-id="{{ event.id }}"
+                 data-name="{{ event.name }}"
+                 data-image="/media/{{ event.image }}"
+                 data-category="{{ event.category }}"
+                 data-price="{{ event.price }}"
+                 data-description="{{ event.description }}"
+                 data-short-description="{{ event.short_description }}"
+                 data-location="{% if event.location %}{{ event.location }}{% else %}Локация не указана{% endif %}"
+                 data-start-datetime="{% if event.start_datetime %}{{ event.start_datetime|date:'d.m.Y H:i' }}{% else %}Дата не назначена{% endif %}"
+                 data-end-datetime="{% if event.end_datetime %}{{ event.end_datetime|date:'d.m.Y H:i' }}{% else %}Дата окончания не указана{% endif %}"
+                 data-duration="{{ event.duration }}"
+                 data-max-participants="{{ event.max_participants }}">
+                <img src="/media/{{ event.image }}" class="card-img-top" alt="{{ event.name }}">
+                <div class="card-body d-flex flex-column">
+                    <!-- Бейдж с названием категории -->
+                    <span class="badge bg-primary mb-2">{{ event.category }}</span>
 
-        <!-- Карточка 2 -->
-        <div class="col-lg-4 col-md-6">
-            <div class="card event-card h-100" data-bs-toggle="modal" data-bs-target="#eventModal"
-                 data-event-id="2" data-category="nature">
-                <img src="https://images.unsplash.com/photo-1571988840298-3b5301d5109b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                     class="card-img-top" alt="Золотое кольцо России">
-                <div class="card-body">
-                    <span class="badge bg-success mb-2">Природа</span>
-                    <h5 class="card-title">Золотое кольцо: Суздаль и Владимир</h5>
-                    <p class="card-text">Автобусный тур по древним городам России с посещением храмов и монастырей.</p>
-                    <div class="mt-auto">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <span class="h5 text-success mb-0">4 200 ₽</span>
-                                <small class="text-muted d-block">за человека</small>
-                            </div>
-                            <div class="text-end">
-                                <div><i class="bi bi-clock"></i> 12 часов</div>
-                                <div><i class="bi bi-people"></i> до 30 чел.</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                    <!-- Название события -->
+                    <h5 class="card-title">{{ event.name }}</h5>
 
-        <!-- Карточка 3 -->
-        <div class="col-lg-4 col-md-6">
-            <div class="card event-card h-100" data-bs-toggle="modal" data-bs-target="#eventModal"
-                 data-event-id="3" data-category="history">
-                <img src="https://images.unsplash.com/photo-1591386761967-9012d91c6c8a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                     class="card-img-top" alt="Кремлевские сокровища">
-                <div class="card-body">
-                    <span class="badge bg-warning mb-2">Исторические</span>
-                    <h5 class="card-title">Экскурсия по Московскому Кремлю</h5>
-                    <p class="card-text">Посещение музеев Кремля, Оружейной палаты и Алмазного фонда с
-                        гидом-историком.</p>
-                    <div class="mt-auto">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <span class="h5 text-success mb-0">2 800 ₽</span>
-                                <small class="text-muted d-block">за человека</small>
-                            </div>
-                            <div class="text-end">
-                                <div><i class="bi bi-clock"></i> 4 часа</div>
-                                <div><i class="bi bi-people"></i> до 10 чел.</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                    <!-- Краткое описание -->
+                    <p class="card-text">{{ event.short_description }}</p>
 
-        <!-- Карточка 4 -->
-        <div class="col-lg-4 col-md-6">
-            <div class="card event-card h-100" data-bs-toggle="modal" data-bs-target="#eventModal"
-                 data-event-id="4" data-category="food">
-                <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                     class="card-img-top" alt="Гастрономический тур">
-                <div class="card-body">
-                    <span class="badge bg-danger mb-2">Гастрономия</span>
-                    <h5 class="card-title">Гастрономический тур по Москве</h5>
-                    <p class="card-text">Дегустация блюд русской кухни в лучших ресторанах и кафе исторического
-                        центра.</p>
-                    <div class="mt-auto">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <span class="h5 text-success mb-0">3 500 ₽</span>
-                                <small class="text-muted d-block">за человека</small>
-                            </div>
-                            <div class="text-end">
-                                <div><i class="bi bi-clock"></i> 3.5 часа</div>
-                                <div><i class="bi bi-people"></i> до 8 чел.</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                    <!-- Полное описание -->
+                    <p class="card-text small text-muted">{{ event.description|truncatechars:100 }}</p>
 
-        <!-- Карточка 5 -->
-        <div class="col-lg-4 col-md-6">
-            <div class="card event-card h-100" data-bs-toggle="modal" data-bs-target="#eventModal"
-                 data-event-id="5" data-category="adventure">
-                <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                     class="card-img-top" alt="Крыши Москвы">
-                <div class="card-body">
-                    <span class="badge bg-info mb-2">Приключения</span>
-                    <h5 class="card-title">Экскурсия по крышам Москвы</h5>
-                    <p class="card-text">Необычный тур с панорамным видом на город и фотосессией на крышах исторических
-                        зданий.</p>
                     <div class="mt-auto">
-                        <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <!-- Цена -->
                             <div>
-                                <span class="h5 text-success mb-0">2 200 ₽</span>
+                                <span class="h5 text-success mb-0">{{ event.price }} ₽</span>
                                 <small class="text-muted d-block">за человека</small>
                             </div>
-                            <div class="text-end">
-                                <div><i class="bi bi-clock"></i> 2.5 часа</div>
-                                <div><i class="bi bi-people"></i> до 6 чел.</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <!-- Карточка 6 -->
-        <div class="col-lg-4 col-md-6">
-            <div class="card event-card h-100" data-bs-toggle="modal" data-bs-target="#eventModal"
-                 data-event-id="6" data-category="nature">
-                <img src="https://images.unsplash.com/photo-1564501049418-3c27787d01e8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                     class="card-img-top" alt="Подмосковные усадьбы">
-                <div class="card-body">
-                    <span class="badge bg-success mb-2">Природа</span>
-                    <h5 class="card-title">Усадьбы Подмосковья: Архангельское</h5>
-                    <p class="card-text">Тур в дворянскую усадьбу с парковым комплексом и посещением
-                        музея-заповедника.</p>
-                    <div class="mt-auto">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <span class="h5 text-success mb-0">2 900 ₽</span>
-                                <small class="text-muted d-block">за человека</small>
-                            </div>
+                            <!-- Максимальное количество участников -->
                             <div class="text-end">
-                                <div><i class="bi bi-clock"></i> 6 часов</div>
-                                <div><i class="bi bi-people"></i> до 20 чел.</div>
+                                <div><i class="bi bi-people"></i> {{ event.max_participants }} мест</div>
                             </div>
+                        </div>
+
+                        <!-- Длительность события -->
+                        <div class="mb-2">
+                            <i class="bi bi-clock"></i> {{ event.duration }}
+                        </div>
+
+                        <!-- Локация -->
+                        <div class="mb-2">
+                            <i class="bi bi-geo-alt"></i>
+                            {% if event.location %}
+                                {{ event.location|truncatechars:30 }}
+                            {% else %}
+                                Локация не указана
+                            {% endif %}
+                        </div>
+
+                        <!-- Дата и время начала -->
+                        <div class="mb-1">
+                            <i class="bi bi-calendar-event"></i>
+                            {% if event.start_datetime %}
+                                {{ event.start_datetime|date:"d.m.Y H:i" }}
+                            {% else %}
+                                Дата не назначена
+                            {% endif %}
+                        </div>
+
+                        <!-- Дата и время окончания -->
+                        <div>
+                            <i class="bi bi-calendar-check"></i>
+                            {% if event.end_datetime %}
+                                {{ event.end_datetime|date:"d.m.Y H:i" }}
+                            {% else %}
+                                Дата окончания не указана
+                            {% endif %}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        {% endfor %}
     </div>
-
-    <!-- Пагинация -->
-    <nav class="mt-5">
-        <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1">Назад</a>
-            </li>
-            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#">Вперед</a>
-            </li>
-        </ul>
-    </nav>
 </main>
 {% endblock %}
-
 
 {% block bonusModal %}
 <!-- Модальное окно экскурсии -->
@@ -282,27 +173,35 @@
                             <span class="badge bg-primary" id="modalCategory">Категория</span>
                             <span class="h5 text-success mb-0" id="modalPrice">0 ₽</span>
                         </div>
-                        <p id="modalDescription">Описание экскурсии</p>
+                        <!-- Краткое описание -->
+                        <p class="lead mb-3" id="modalShortDescription"></p>
+                        <!-- Полное описание -->
+                        <p id="modalDescription"></p>
                     </div>
                     <div class="col-md-6">
                         <div class="mb-4">
                             <h6><i class="bi bi-geo-alt me-2"></i>Место сбора</h6>
-                            <p id="modalLocation" class="mb-0">Адрес</p>
+                            <p id="modalLocation" class="mb-0"></p>
                         </div>
 
                         <div class="mb-4">
-                            <h6><i class="bi bi-calendar me-2"></i>Дата и время</h6>
-                            <p id="modalDateTime" class="mb-0">Ежедневно в 10:00</p>
+                            <h6><i class="bi bi-calendar-event me-2"></i>Дата и время начала</h6>
+                            <p id="modalStartDatetime" class="mb-0"></p>
+                        </div>
+
+                        <div class="mb-4">
+                            <h6><i class="bi bi-calendar-check me-2"></i>Дата и время окончания</h6>
+                            <p id="modalEndDatetime" class="mb-0"></p>
                         </div>
 
                         <div class="mb-4">
                             <h6><i class="bi bi-clock me-2"></i>Продолжительность</h6>
-                            <p id="modalDuration" class="mb-0">3 часа</p>
+                            <p id="modalDuration" class="mb-0"></p>
                         </div>
 
                         <div class="mb-4">
                             <h6><i class="bi bi-people me-2"></i>Размер группы</h6>
-                            <p id="modalGroupSize" class="mb-0">до 15 человек</p>
+                            <p id="modalGroupSize" class="mb-0"></p>
                         </div>
 
                         <div class="border p-3 rounded bg-light">
@@ -311,6 +210,7 @@
                                 <label for="ticketsQuantity" class="form-label">Количество участников:</label>
                                 <input type="number" class="form-control" id="ticketsQuantity"
                                        min="1" max="10" value="1">
+                                <small class="text-muted" id="maxParticipantsHint">Максимум: 10 человек</small>
                             </div>
                             <div class="mb-3">
                                 <label for="tourDate" class="form-label">Дата экскурсии:</label>
@@ -329,4 +229,3 @@
     </div>
 </div>
 {% endblock %}
-

@@ -1,6 +1,7 @@
 {% extends 'events/base.html' %}
 {% load static %}
 
+<!--{% block title %}{{ title }}{% endblock %}-->
 
 {% block css %}
 <!-- Стили -->
@@ -48,12 +49,12 @@
                     Бронируйте экскурсии, умные отели и получайте единый цифровой ключ для всего.
                     Технологии встречаются с комфортом.
                 </p>
-                <a id="start-purchase-btn" href="{% url 'events' %}" class="btn btn-primary btn-lg px-4">
+                <a id="start-purchase-btn" href="{% url 'events:index' %}" class="btn btn-primary btn-lg px-4">
                     Каталог экскурсий
                 </a>
             </div>
             <div class="col-lg-6">
-                <img src="{% static 'img/midjrn.jpg' %}" class="img-fluid rounded-3 shadow" alt="Путешествия">
+                <img src="{% static 'img/pasport.jpg' %}" class="img-fluid rounded-3 shadow" alt="Путешествия">
             </div>
         </div>
     </div>

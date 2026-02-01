@@ -1,10 +1,24 @@
 from django.shortcuts import render
 
+# from smartTravel.events.models import Event, EventCategory
+from events.models import Event, EventCategory
+
+
 def index(request):
-    return render(request, 'events/index.html')
+    context = {
+        'title': 'SmartTravel',
+    }
+    return render(request, 'events/index.html', context)
+
+
+
+
 
 def events(request):
-    return render(request, 'events/events.html')
+    context = {
+        'title': 'Events | SmartTravel',
+        'events': Event.objects.all(),
+        'categories': EventCategory.objects.all(),
+    }
 
-
-
+    return render(request, "events/events.html", context)

@@ -16,12 +16,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
+from django.urls import include, path
 from events.views import index, events
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),
-    path('events/', events, name= 'events'),
+    path('events/', include('events.urls', namespace='events')),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
