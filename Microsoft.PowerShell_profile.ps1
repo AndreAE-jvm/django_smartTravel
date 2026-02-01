@@ -20,9 +20,6 @@ function djm-all {
 
 Set-Alias mm djm-all
 
-function djtest {
-    python manage.py test
-}
 
 function nd {
     param(
@@ -136,12 +133,35 @@ function djmigrate-reset {
 
 ## Редактировать и синхронизировать локальный и файл профиля
 function es {
-    notepad $PROFILE
-    Copy-Item $PROFILE "C:\IT\Python\django_project\smartTravel\Microsoft.PowerShell_profile.ps1" -Force
+    $localFile = $PROFILE
+    $projectFile = "C:\IT\Python\django_project\smartTravel\Microsoft.PowerShell_profile.ps1"
+    
+    Write-Host "✏️  Редактирование профиля..." -ForegroundColor Cyan
+    
+    # Ключевое: -Wait ЖДЕТ пока закроешь блокнот
+    Start-Process notepad.exe -ArgumentList $localFile -Wait
+    
+    # Только ПОСЛЕ закрытия блокнота копируем
+    Copy-Item $localFile $projectFile -Force
     . $PROFILE
-    Write-Host "✅ Синхронизировано" -ForegroundColor Green
+    
+    Write-Host "✅ Синхронизировано с проектом" -ForegroundColor Green
 }
 
+function ep {    
+    
+    # Добавляем только этот файл
+    git add Microsoft.PowerShell_profile.ps1
+    
+    # Коммит
+    $time = Get-Date -Format "HH:mm:ss"
+    git commit -m "Profile update $time"
+    
+    # Push
+    git push
+    
+    Write-Host "✅ Профиль отправлен на GitHub" -ForegroundColor Green
+}
 
 
 function djh {
