@@ -202,7 +202,7 @@ function djh {
     Write-Host "notepad `$PROFILE  - Open profile in notepad" -ForegroundColor Cyan
     Write-Host ". `$PROFILE        - Reload profile" -ForegroundColor Cyan
     Write-Host "es                 - Редактировать и синхронизировать, из локального в профиль проекта" -ForegroundColor Cyan
-    Write-Host "ep                 - Редактировать и отправить на GitHub" -ForegroundColor Cyan
+    Write-Host "ep                 - Отправить на GitHub только Microsoft.PowerShell_profile.ps1" -ForegroundColor Cyan
     Write-Host "djh                - Show this help" -ForegroundColor Cyan
     Write-Host "Tab key            - Auto-completion" -ForegroundColor Cyan
     Write-Host "  c                - Clear terminal" -ForegroundColor Cyan
