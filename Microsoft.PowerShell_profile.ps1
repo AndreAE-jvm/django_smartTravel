@@ -148,7 +148,7 @@ function es {
     Write-Host "✅ Синхронизировано с проектом" -ForegroundColor Green
 }
 
-function ep {    
+function eg {    
     
     # Добавляем только этот файл
     git add Microsoft.PowerShell_profile.ps1
@@ -179,7 +179,7 @@ function djh {
     Write-Host "  djm    - Применить миграции" -ForegroundColor Green
     Write-Host "  mm     - Создать + применить" -ForegroundColor Green    
     Write-Host "  djsu   - Суперпользователь" -ForegroundColor Green
-    Write-Host "  djrecreate-db - Удалить и создать новую БД (Радикальное решение, миграции нужно применять, админка удаляется)" -ForegroundColor DarkRed
+    Write-Host "  djrecreate-db - Удалить и создать новую БД (Радикальное решение, миграции нужно применять(автоматически применены), админка удаляется)" -ForegroundColor DarkRed
     Write-Host "  djflush - Очистить все данные (без удаления БД, предпочтительно делать эту команду, миграции не нужно применять, админка удаляется)" -ForegroundColor DarkRed
     Write-Host "  djclear-events - Удалить только события и категории, админка остается" -ForegroundColor DarkRed    
     Write-Host "  djmigrate-reset - Сбросить миграции для events" -ForegroundColor DarkRed
@@ -202,7 +202,7 @@ function djh {
     Write-Host "notepad `$PROFILE  - Open profile in notepad" -ForegroundColor Cyan
     Write-Host ". `$PROFILE        - Reload profile" -ForegroundColor Cyan
     Write-Host "es                 - Редактировать и синхронизировать, из локального в профиль проекта" -ForegroundColor Cyan
-    Write-Host "ep                 - Отправить на GitHub только Microsoft.PowerShell_profile.ps1" -ForegroundColor Cyan
+    Write-Host "eg                 - Отправить на GitHub только Microsoft.PowerShell_profile.ps1" -ForegroundColor Cyan
     Write-Host "djh                - Show this help" -ForegroundColor Cyan
     Write-Host "Tab key            - Auto-completion" -ForegroundColor Cyan
     Write-Host "  c                - Clear terminal" -ForegroundColor Cyan
