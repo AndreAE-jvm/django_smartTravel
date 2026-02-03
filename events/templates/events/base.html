@@ -21,6 +21,9 @@
     <!-- Стили -->
     {% block css %} {% endblock %}
 
+    <!-- Дополнительные CSS -->
+    {% block auth_css %} {% endblock %}
+
     <!-- Скрипт -->
     {% block js %} {% endblock %}
 
@@ -63,9 +66,9 @@
                 </button>
 
                 <!-- Кнопка Войти -->
-                <button class="btn btn-outline-primary" onclick="showAuthModal()">
+                <a href="{% url 'users:login' %}" class="btn btn-outline-primary">
                     <i class="bi bi-box-arrow-in-right me-1"></i>Войти
-                </button>
+                </a>
             </div>
         </div>
     </div>

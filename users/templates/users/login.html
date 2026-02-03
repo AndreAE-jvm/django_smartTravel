@@ -1,0 +1,63 @@
+{% extends 'events/base.html' %}
+{% load static %}
+
+{% block title %}SmartTravel - Авторизация{% endblock %}
+
+{% block auth_css %}
+    <!-- Кастомные стили для форм авторизации -->
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="auth-body">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7 col-xxl-6">
+                <div class="card auth-card mt-5 mb-5">
+                    <div class="card-header auth-header text-center text-white">
+                        <h4 class="mb-0"><i class="bi bi-box-arrow-in-right me-2"></i>Авторизация</h4>
+                    </div>
+                    <div class="card-body p-4">
+                        <form method="post" class="auth-form">
+                            {% csrf_token %}
+                            <div class="form-group mb-3">
+                                <label class="form-label" for="inputUsername">Имя пользователя</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                    <input class="form-control py-2" id="inputUsername" type="text"
+                                           name="username" placeholder="Введите имя пользователя" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label class="form-label" for="inputPassword">Пароль</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                                    <input class="form-control py-2" id="inputPassword" type="password"
+                                           name="password" placeholder="Введите пароль" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-3">
+                                <a class="small auth-link" href="#">
+                                    <i class="bi bi-question-circle me-1"></i>Забыли пароль?
+                                </a>
+                                <button class="btn btn-primary px-4" type="submit">
+                                    <i class="bi bi-box-arrow-in-right me-1"></i>Авторизоваться
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer auth-footer text-center py-3">
+                        <div class="small">
+                            <a href="{% url 'users:register' %}" class="auth-link">
+                                <i class="bi bi-person-plus me-1"></i>Нужен аккаунт? Зарегистрируйся!
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

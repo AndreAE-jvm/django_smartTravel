@@ -13,6 +13,12 @@
 body {
     padding-top: 76px;
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    /*background-image: url('/static/img/церковь4.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;*/
 }
 
 /* Эффект для градиентного текста */

@@ -1,0 +1,109 @@
+{% extends 'events/base.html' %}
+{% load static %}
+
+{% block title %}SmartTravel - Регистрация{% endblock %}
+
+{% block auth_css %}
+    <!-- Кастомные стили для форм авторизации -->
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="auth-body">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12 col-lg-10 col-xl-9 col-xxl-8">
+                <div class="card auth-card mt-5 mb-5">
+                    <div class="card-header auth-header text-center text-white">
+                        <h4 class="mb-0"><i class="bi bi-person-plus me-2"></i>Создать аккаунт</h4>
+                    </div>
+                    <div class="card-body p-4">
+                        <form method="post" class="auth-form">
+                            {% csrf_token %}
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label" for="inputFirstName">Имя</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                            <input class="form-control py-2" id="inputFirstName" type="text"
+                                                   name="first_name" placeholder="Введите имя" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label" for="inputLastName">Фамилия</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                            <input class="form-control py-2" id="inputLastName" type="text"
+                                                   name="last_name" placeholder="Введите фамилию" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label class="form-label" for="inputUsername">Имя пользователя</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-person-badge"></i></span>
+                                    <input class="form-control py-2" id="inputUsername" type="text"
+                                           name="username" placeholder="Введите имя пользователя" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label class="form-label" for="inputEmail">Адрес электронной почты</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                                    <input class="form-control py-2" id="inputEmail" type="email"
+                                           name="email" placeholder="Введите адрес эл. почты" required>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label" for="inputPassword">Пароль</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                                            <input class="form-control py-2" id="inputPassword" type="password"
+                                                   name="password" placeholder="Введите пароль" required>
+                                        </div>
+                                        <div class="password-hint">
+                                            Минимум 8 символов
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label" for="inputConfirmPassword">Подтверждение пароля</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+                                            <input class="form-control py-2" id="inputConfirmPassword" type="password"
+                                                   name="confirm_password" placeholder="Подтвердите пароль" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group mt-4 mb-0">
+                                <button class="btn btn-primary btn-block w-100 py-2" type="submit">
+                                    <i class="bi bi-person-plus me-1"></i>Создать аккаунт
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer auth-footer text-center py-3">
+                        <div class="small">
+                            <a href="{% url 'users:login' %}" class="auth-link">
+                                <i class="bi bi-box-arrow-in-right me-1"></i>Уже есть аккаунт? Авторизоваться
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

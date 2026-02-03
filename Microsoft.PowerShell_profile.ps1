@@ -9,6 +9,27 @@ function djmm { python manage.py makemigrations @args }
 function djsu { python manage.py createsuperuser }
 function dev { python manage.py runserver 127.0.0.1:8000 @args }
 
+function djsup {
+    # Создаем пользователя если нужно
+    python manage.py shell -c "
+from django.contrib.auth import get_user_model
+User = get_user_model()
+if not User.objects.filter(username='admin').exists():
+    User.objects.create_superuser('admin', '', 'admin22')
+"
+    
+    # Показываем информацию
+    Write-Host "🚀 Запускаю сервер Django..." -ForegroundColor Yellow
+    Write-Host "   После запуска откройте:" -ForegroundColor Green
+    Write-Host "   http://127.0.0.1:8000/admin/" -ForegroundColor Cyan
+    Write-Host "   Логин: admin, Пароль: admin22" -ForegroundColor White
+    Write-Host ""
+    Write-Host "   Чтобы остановить: Ctrl+C" -ForegroundColor Gray
+    
+    # Запускаем сервер в текущем окне
+    python manage.py runserver
+}
+
 function djm-all {
     Write-Host "====== Django Migrations ======" -ForegroundColor Yellow
     Write-Host "Step 1: makemigrations" -ForegroundColor Green
@@ -100,22 +121,20 @@ except Exception as e:
 }
 
 function djrecreate-db {
-    # Удаляем старую БД (если есть)
+    Write-Host "🔄 Пересоздание базы данных..." -ForegroundColor Yellow
+    
+    # 1. Удаляем БД
     if (Test-Path "db.sqlite3") {
         Remove-Item "db.sqlite3" -Force
         Write-Host "🗑️  Старая БД удалена" -ForegroundColor Green
-    } else {
-        Write-Host "ℹ️  Файл БД не найден, создаем новую" -ForegroundColor Yellow
     }
     
-    # ОБЯЗАТЕЛЬНО создаем новую БД через миграции
-    Write-Host "📦 Создание новой БД (migrate)..." -ForegroundColor Cyan
+    # 2. Делаем миграции (и создаем, и применяем)
+    Write-Host "📝 Создание и применение миграций..." -ForegroundColor Cyan
+    python manage.py makemigrations
     python manage.py migrate
     
-    Write-Host "✅ Новая БД создана!" -ForegroundColor Green
-    Write-Host "   📁 Файл: db.sqlite3" -ForegroundColor White
-    Write-Host "   🗃️  Таблицы созданы" -ForegroundColor White
-    Write-Host "   🚀 Готово к работе!" -ForegroundColor White
+    Write-Host "✅ Новая БД создана с нуля!" -ForegroundColor Green
 }
 
 function djmigrate-reset {
@@ -132,21 +151,25 @@ function djmigrate-reset {
 }
 
 ## Редактировать и синхронизировать локальный и файл профиля
-function es {
-    $localFile = $PROFILE
+     function es {
     $projectFile = "C:\IT\Python\django_project\smartTravel\Microsoft.PowerShell_profile.ps1"
     
-    Write-Host "✏️  Редактирование профиля..." -ForegroundColor Cyan
+    Write-Host "✏️  Редактирование профиля проекта..." -ForegroundColor Cyan
     
-    # Ключевое: -Wait ЖДЕТ пока закроешь блокнот
-    Start-Process notepad.exe -ArgumentList $localFile -Wait
+    # 1. Открываем проектную версию
+    $notepad = Start-Process notepad.exe -ArgumentList $projectFile -PassThru
+    $notepad.WaitForExit()
     
-    # Только ПОСЛЕ закрытия блокнота копируем
-    Copy-Item $localFile $projectFile -Force
+    # 2. Копируем в локальную
+    Copy-Item $projectFile $PROFILE -Force
+    
+    # 3. Перезагружаем
+    Write-Host "🔄 Перезагрузка профиля..." -ForegroundColor Yellow
     . $PROFILE
     
-    Write-Host "✅ Синхронизировано с проектом" -ForegroundColor Green
+    Write-Host "✅ Профиль обновлен!" -ForegroundColor Green
 }
+
 
 function eg {    
     
@@ -172,6 +195,12 @@ function djh {
     Write-Host "  djr    - Запустить сервер" -ForegroundColor Green
     Write-Host "  dev    - Сервер на 127.0.0.1:8000" -ForegroundColor Green
     Write-Host "  django - Любая manage.py команда" -ForegroundColor Green
+
+    # Суперпользователи
+    Write-Host "`n👑 Администраторы:" -ForegroundColor Cyan
+    Write-Host "  djsu   - Создать суперпользователя (интерактивно)" -ForegroundColor Green
+    Write-Host "  djsup  - Автоматически создать admin/admin22" -ForegroundColor Green
+    
     
     # База данных
     Write-Host "`n🗃️  База данных:" -ForegroundColor Cyan
@@ -179,7 +208,7 @@ function djh {
     Write-Host "  djm    - Применить миграции" -ForegroundColor Green
     Write-Host "  mm     - Создать + применить" -ForegroundColor Green    
     Write-Host "  djsu   - Суперпользователь" -ForegroundColor Green
-    Write-Host "  djrecreate-db - Удалить и создать новую БД (Радикальное решение, миграции нужно применять(автоматически применены), админка удаляется)" -ForegroundColor DarkRed
+    Write-Host "  djrecreate-db - Удалить и создать новую БД (Радикальное решение, миграции нужно создать и применять(автоматически применены), админка удаляется)" -ForegroundColor DarkRed
     Write-Host "  djflush - Очистить все данные (без удаления БД, предпочтительно делать эту команду, миграции не нужно применять, админка удаляется)" -ForegroundColor DarkRed
     Write-Host "  djclear-events - Удалить только события и категории, админка остается" -ForegroundColor DarkRed    
     Write-Host "  djmigrate-reset - Сбросить миграции для events" -ForegroundColor DarkRed
@@ -200,7 +229,7 @@ function djh {
     
     # 1. Информация о командах
     Write-Host "notepad `$PROFILE  - Open profile in notepad" -ForegroundColor Cyan
-    Write-Host ". `$PROFILE        - Reload profile" -ForegroundColor Cyan
+    Write-Host ". `$PROFILE        - Reload profile" -ForegroundColor Cyan    
     Write-Host "es                 - Редактировать и синхронизировать, из локального в профиль проекта" -ForegroundColor Cyan
     Write-Host "eg                 - Отправить на GitHub только Microsoft.PowerShell_profile.ps1" -ForegroundColor Cyan
     Write-Host "djh                - Show this help" -ForegroundColor Cyan
