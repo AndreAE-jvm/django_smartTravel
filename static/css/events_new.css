@@ -1,0 +1,279 @@
+/* events_new.css - Стили только для страницы событий */
+
+/* Переменные CSS */
+:root {
+    --primary: #2a6e3f;
+    --primary-light: #4a9e5d;
+    --secondary: #b86f3c;
+    --accent: #3a7ca5;
+    --light: #ffffff;
+    --dark: #1a150d;
+    --shadow: 0 2px 10px rgba(0,0,0,0.1);
+    --radius: 8px;
+}
+
+/* Фон для страницы событий */
+body {
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+/* ОСНОВНОЙ КОНТЕНТ */
+main.container {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+    padding: 2rem !important;
+}
+
+/* ЗАГОЛОВОК И КАТЕГОРИИ */
+h1 {
+    color: var(--primary);
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-bottom: 0.75rem;
+}
+h1::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary), var(--primary-light));
+    border-radius: 2px;
+}
+
+/* ФИЛЬТР КАТЕГОРИЙ */
+#categoryFilter {
+    margin-bottom: 2rem;
+}
+.category-btn {
+    border-radius: 20px;
+    padding: 0.5rem 1.25rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 1px solid var(--primary);
+}
+
+/* Для ВСЕХ кнопок категорий при наведении */
+.category-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Активные кнопки (включая "Все направления") */
+.category-btn.active {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: white;
+    border-color: var(--primary);
+}
+
+/* Неактивные кнопки */
+.category-btn:not(.active) {
+    background-color: transparent;
+    color: var(--primary);
+}
+
+/* Неактивные кнопки при наведении */
+.category-btn:not(.active):hover {
+    background-color: var(--primary) !important;
+    color: white !important;
+    border-color: var(--primary) !important;
+}
+
+/* КНОПКА СОРТИРОВКИ */
+.btn-outline-primary {
+    --bs-btn-color: var(--primary);
+    --bs-btn-border-color: var(--primary);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: var(--primary);
+    --bs-btn-hover-border-color: var(--primary);
+    --bs-btn-focus-shadow-rgb: 42, 110, 63;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: var(--primary);
+    --bs-btn-active-border-color: var(--primary);
+}
+
+.btn-outline-primary.dropdown-toggle {
+    border-radius: 20px;
+    padding: 0.5rem 1.25rem;
+}
+
+.dropdown-menu {
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.dropdown-item {
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    margin: 0.1rem 0.5rem;
+    width: auto;
+}
+
+.dropdown-item:hover {
+    background-color: rgba(42, 110, 63, 0.1);
+    color: var(--primary);
+}
+
+/* КАРТОЧКИ ЭКСКУРСИЙ */
+.event-card-container {
+    margin-bottom: 1.5rem;
+}
+
+.event-card {
+    transition: all 0.3s ease;
+    border: none;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    background: white;
+    cursor: pointer;
+    height: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.event-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    border-color: rgba(42, 110, 63, 0.2);
+}
+
+.event-card img {
+    height: 220px;
+    object-fit: cover;
+    width: 100%;
+    transition: transform 0.5s ease;
+}
+.event-card:hover img {
+    transform: scale(1.05);
+}
+
+.event-card .card-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+}
+
+.event-card .card-text {
+    color: #666;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.event-card .badge {
+    font-size: 0.75rem;
+    padding: 0.4em 0.8em;
+    font-weight: 600;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: white;
+    border-radius: 12px;
+}
+
+.event-card .text-success {
+    color: var(--primary) !important;
+    font-weight: 700;
+    font-size: 1.3rem;
+}
+.event-card small.text-muted {
+    color: #888;
+    font-size: 0.85rem;
+}
+
+.event-card i {
+    color: var(--primary);
+    margin-right: 0.5rem;
+}
+
+/* ЦЕНА И МЕСТА */
+.event-card .d-flex.justify-content-between {
+    padding: 0.75rem 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    margin-top: auto;
+}
+
+/* МОДАЛЬНОЕ ОКНО */
+.modal-content {
+    border-radius: 16px;
+    border: none;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: white;
+    border-radius: 16px 16px 0 0;
+    padding: 1.5rem 2rem;
+}
+
+.modal-title {
+    font-weight: 700;
+}
+
+#modalImage {
+    height: 280px;
+    object-fit: cover;
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.modal-body {
+    padding: 2rem;
+}
+
+.modal-body h6 {
+    color: var(--primary);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+.modal-body p {
+    color: #555;
+    line-height: 1.6;
+}
+
+/* БРОНИРОВАНИЕ */
+.bg-light {
+    background-color: rgba(42, 110, 63, 0.05) !important;
+    border-radius: 12px;
+    border: 1px solid rgba(42, 110, 63, 0.1);
+}
+
+.form-control {
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    padding: 0.75rem 1rem;
+    transition: all 0.3s ease;
+}
+.form-control:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(42, 110, 63, 0.2);
+}
+
+#bookBtn {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    border: none;
+    border-radius: 10px;
+    padding: 1rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+#bookBtn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(42, 110, 63, 0.3);
+}
+
+/* АДАПТИВНОСТЬ */
+@media (max-width: 992px) {
+    main.container {
+        padding: 1.5rem !important;

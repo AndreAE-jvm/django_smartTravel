@@ -4,8 +4,14 @@
 <!--{% block title %}{{ title }}{% endblock %}-->
 
 {% block css %}
-<!-- Кастомные стили -->
-<link rel="stylesheet" href="{% static 'css/events.css' %}">
+<!-- Стили -->
+<link rel="stylesheet" href="{% static 'css/events_new.css' %}">
+{% endblock %}
+
+
+<!--Общие стили для хедера и футера на всех страницах-->
+{% block base_css %}
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
 {% endblock %}
 
 {% block js %}
@@ -23,7 +29,7 @@
             <!-- Фильтр по категориям -->
             <div class="d-flex flex-wrap gap-2 mb-3" id="categoryFilter">
                 <!-- Кнопка "Все" -->
-                <button class="btn btn-primary category-btn active" data-category="all">
+                <button class="btn btn-primary category-btn" data-category="all">
                     Все направления
                 </button>
 
@@ -122,9 +128,9 @@
                         <div class="mb-2">
                             <i class="bi bi-geo-alt"></i>
                             {% if event.location %}
-                                {{ event.location|truncatechars:30 }}
+                            {{ event.location|truncatechars:30 }}
                             {% else %}
-                                Локация не указана
+                            Локация не указана
                             {% endif %}
                         </div>
 
@@ -132,9 +138,9 @@
                         <div class="mb-1">
                             <i class="bi bi-calendar-event"></i>
                             {% if event.start_datetime %}
-                                {{ event.start_datetime|date:"d.m.Y H:i" }}
+                            {{ event.start_datetime|date:"d.m.Y H:i" }}
                             {% else %}
-                                Дата не назначена
+                            Дата не назначена
                             {% endif %}
                         </div>
 
@@ -142,9 +148,9 @@
                         <div>
                             <i class="bi bi-calendar-check"></i>
                             {% if event.end_datetime %}
-                                {{ event.end_datetime|date:"d.m.Y H:i" }}
+                            {{ event.end_datetime|date:"d.m.Y H:i" }}
                             {% else %}
-                                Дата окончания не указана
+                            Дата окончания не указана
                             {% endif %}
                         </div>
                     </div>

@@ -5,11 +5,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="SmartTravel - умные путешествия с цифровыми технологиями. Экскурсии, бронирование, навигация.">
+    <meta name="description"
+          content="SmartTravel - умные путешествия с цифровыми технологиями. Экскурсии, бронирование, навигация.">
     <meta name="author" content="SmartTravel Team">
 
-     <title>{% block title %}SmartTravel{% endblock %}</title>
-<!--     <title>{{ title|title }}</title>-->
+    <title>{% block title %}SmartTravel{% endblock %}</title>
+    <!--     <title>{{ title|title }}</title>-->
 
     <!--Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -18,11 +19,19 @@
     <!-- Иконки -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
 
-    <!-- Стили -->
+    <!--Общие стили для хедера и футера на всех страницах-->
+    {% block base_css %} {% endblock %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+    <!-- Общие стили сайта для каждой страницы -->
     {% block css %} {% endblock %}
 
-    <!-- Дополнительные CSS -->
+    <!-- Стили для авторизации -->
     {% block auth_css %} {% endblock %}
+
+    <!-- Стили для главного фона -->
+    {% block background %} {% endblock %}
+
 
     <!-- Скрипт -->
     {% block js %} {% endblock %}
@@ -31,7 +40,7 @@
 </head>
 <body>
 
-<!-- Навигация -->
+<!-- header -->
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
     <div class="container">
         <a class="navbar-brand fw-bold text-primary" href="{% url 'index' %}">
@@ -79,7 +88,7 @@
 
 {% block content %} {% endblock %}
 
-<!-- Подвал -->
+<!-- footer -->
 <footer class="bg-dark text-white py-5">
     <div class="container">
         <div class="row">

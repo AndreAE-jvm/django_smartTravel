@@ -1,36 +1,51 @@
-/* auth.css - Общие стили для форм авторизации и регистрации */
+/* auth_new.css - Общие стили для форм авторизации и регистрации */
+
+/* Переменные в стиле главной страницы */
+:root {
+    --primary: #2a6e3f;
+    --primary-light: #4a9e5d;
+    --secondary: #b86f3c;
+    --accent: #3a7ca5;
+    --light: #ffffff;
+    --dark: #1a150d;
+    --overlay-light: rgba(248, 245, 240, 0.85);
+}
 
 .auth-body {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    background-color: #f8f9fa;
+    background: linear-gradient(rgba(42, 110, 63, 0.05), rgba(184, 111, 60, 0.05));
     padding-top: 80px;
     padding-bottom: 2rem;
 }
 
 .auth-card {
     border: none;
-    border-radius: 12px;
-    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.15);
+    border-radius: 16px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     width: 100%;
+    overflow: hidden;
+    background: white;
+    border: 1px solid rgba(42, 110, 63, 0.1);
 }
 
 .auth-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
 }
 
 .auth-header {
-    border-radius: 12px 12px 0 0 !important;
+    border-radius: 16px 16px 0 0 !important;
     padding: 2rem 1.5rem;
-    background: linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
 }
 
 .auth-header h4 {
-    font-size: 1.75rem;
-    font-weight: 600;
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .auth-header .bi {
@@ -45,13 +60,13 @@
     font-weight: 600;
     font-size: 1rem;
     margin-bottom: 0.75rem;
-    color: #333;
+    color: var(--dark);
     display: block;
     width: 100%;
 }
 
 .auth-form .form-control {
-    border-radius: 8px;
+    border-radius: 10px;
     border: 2px solid #e0e0e0;
     transition: all 0.3s ease;
     font-size: 1rem;
@@ -61,8 +76,8 @@
 }
 
 .auth-form .form-control:focus {
-    border-color: #0d6efd;
-    box-shadow: 0 0 0 0.3rem rgba(13, 110, 253, 0.2);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(42, 110, 63, 0.2);
     transform: translateY(-2px);
 }
 
@@ -71,13 +86,14 @@
 }
 
 .auth-form .input-group-text {
-    background-color: #f8f9fa;
+    background: linear-gradient(135deg, rgba(42, 110, 63, 0.1) 0%, rgba(74, 158, 93, 0.1) 100%);
     border: 2px solid #e0e0e0;
     border-right: none;
     padding: 0 1.25rem;
     font-size: 1.1rem;
     min-width: 50px;
     justify-content: center;
+    color: var(--primary);
 }
 
 .auth-form .input-group .form-control {
@@ -90,21 +106,22 @@
 }
 
 .auth-form .btn-primary {
-    background: linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
     border: none;
-    border-radius: 8px;
+    border-radius: 12px;
     transition: all 0.3s ease;
     font-size: 1rem;
     font-weight: 600;
-    padding: 0.85rem 2rem;
+    padding: 1rem 2rem;
     min-width: 180px;
     white-space: nowrap;
+    box-shadow: 0 5px 15px rgba(42, 110, 63, 0.3);
 }
 
 .auth-form .btn-primary:hover {
-    background: linear-gradient(135deg, #0b5ed7 0%, #0a58ca 100%);
+    background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
     transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 5px 20px rgba(13, 110, 253, 0.4);
+    box-shadow: 0 8px 25px rgba(42, 110, 63, 0.4);
 }
 
 .auth-form .btn-block {
@@ -114,27 +131,27 @@
 }
 
 .auth-footer {
-    background-color: #f8f9fa;
-    border-top: 2px solid #e9ecef;
+    background: linear-gradient(135deg, rgba(42, 110, 63, 0.05) 0%, rgba(184, 111, 60, 0.05) 100%);
+    border-top: 2px solid rgba(42, 110, 63, 0.1);
     padding: 1.5rem 3rem !important;
 }
 
 .auth-link {
-    color: #0d6efd;
+    color: var(--primary);
     font-weight: 600;
     font-size: 1rem;
     text-decoration: none;
     transition: all 0.3s ease;
     padding: 0.5rem 1rem;
-    border-radius: 6px;
+    border-radius: 8px;
     display: inline-block;
     white-space: nowrap;
 }
 
 .auth-link:hover {
-    color: #0b5ed7;
+    color: var(--primary-light);
     text-decoration: none;
-    background-color: rgba(13, 110, 253, 0.1);
+    background-color: rgba(42, 110, 63, 0.1);
     transform: translateY(-2px);
 }
 
@@ -142,6 +159,7 @@
     font-size: 1.1rem;
     vertical-align: middle;
     margin-right: 0.5rem;
+    color: var(--secondary);
 }
 
 .password-hint {
@@ -175,15 +193,28 @@
     margin-top: 3rem !important;
 }
 
+/* Валидация формы */
+.auth-form .form-control.is-invalid {
+    border-color: #dc3545;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23dc3545' viewBox='0 0 12 12'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
+}
+
+.auth-form .form-control.is-valid {
+    border-color: var(--primary);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='%232a6e3f' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+}
+
+/* Сообщения об ошибках */
+.alert {
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+}
+
 /* Широкие формы для больших экранов */
 @media (min-width: 1400px) {
     .auth-card {
         max-width: 750px;
         margin: 0 auto;
-    }
-
-    .col-md-8.col-lg-6.col-xl-5 {
-        max-width: 700px;
     }
 
     .col-md-10.col-lg-8.col-xl-7 {
@@ -205,10 +236,6 @@
         margin: 0 auto;
     }
 
-    .col-md-8.col-lg-6.col-xl-5 {
-        max-width: 650px;
-    }
-
     .col-md-10.col-lg-8.col-xl-7 {
         max-width: 750px;
     }
@@ -228,20 +255,12 @@
         margin: 0 auto;
     }
 
-    .col-md-8.col-lg-6.col-xl-5 {
-        max-width: 600px;
-    }
-
     .col-md-10.col-lg-8.col-xl-7 {
         max-width: 700px;
     }
 }
 
 @media (min-width: 768px) {
-    .col-md-8.col-lg-6.col-xl-5 {
-        max-width: 600px;
-    }
-
     .col-md-10.col-lg-8.col-xl-7 {
         max-width: 700px;
     }
@@ -251,7 +270,7 @@
     }
 
     .auth-header h4 {
-        font-size: 1.8rem;
+        font-size: 1.9rem;
     }
 
     .auth-form .form-label {
@@ -267,11 +286,12 @@
 @media (max-width: 767px) {
     .auth-body {
         padding: 1rem;
+        padding-top: 70px;
     }
 
     .auth-card {
         margin: 0;
-        border-radius: 8px;
+        border-radius: 12px;
     }
 
     .auth-card .card-body {
@@ -289,7 +309,7 @@
 
     .auth-form .btn-primary {
         font-size: 1rem;
-        padding: 0.75rem 1.5rem;
+        padding: 0.85rem 1.5rem;
         min-width: 150px;
     }
 
@@ -337,7 +357,7 @@
 
     .auth-form .btn-primary {
         font-size: 0.95rem;
-        padding: 0.65rem 1rem;
+        padding: 0.75rem 1rem;
     }
 
     .auth-link {
@@ -351,5 +371,26 @@
     .auth-form .input-group-text {
         padding: 0 0.75rem;
         min-width: 45px;
+    }
+}
+
+
+/* Уменьшенные плейсхолдеры для паролей */
+.auth-form input[type="password"]::placeholder {
+    font-size: 0.85rem;
+    color: #6c757d;
+    letter-spacing: 0.2px;
+}
+
+/* Нормальный шрифт для введенного текста */
+.auth-form input[type="password"] {
+    font-size: 1rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* На мобильных еще меньше */
+@media (max-width: 767px) {
+    .auth-form input[type="password"]::placeholder {
+        font-size: 0.8rem;
     }
 }
