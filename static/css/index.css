@@ -88,15 +88,17 @@ body {
 }
 
 .welcome-banner h5 {
-    color: #F5E6D3 !important;
-    font-weight: 700;
+    color: #FF7F50 !important; /* Коралловый оранжевый */
     text-shadow:
         0 1px 0 rgba(0, 0, 0, 0.8),
-        0 2px 0 rgba(0, 0, 0, 0.7),
-        0 3px 0 rgba(0, 0, 0, 0.6),
-        0 4px 0 rgba(0, 0, 0, 0.5),
-        0 5px 10px rgba(0, 0, 0, 0.7);
+        0 2px 0 rgba(0, 0, 0, 0.7);
     letter-spacing: 0.5px;
+    font-weight: 700;
+    transition: color 0.3s ease;
+}
+
+.welcome-banner h5:hover {
+    color: #FF8C00 !important; /* При наведении темнее */
 }
 
 .welcome-banner small {
