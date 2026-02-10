@@ -1,0 +1,169 @@
+{% extends 'events/base.html' %}
+{% load static %}
+
+{% block title %}SmartTravel - Мой профиль{% endblock %}
+
+{% block base_css %}
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
+{% endblock %}
+
+{% block css %}
+<!-- Стили -->
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <!-- Левая колонка - Информация профиля -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header bg-custom-green text-white">
+                    <h5 class="mb-0"><i class="bi bi-person-circle me-2"></i>Мой профиль</h5>
+                </div>
+                <div class="card-body text-center">
+                    <!-- Аватар пользователя -->
+                    <div class="mb-3">
+                        <div class="avatar-placeholder">
+                            <i class="bi bi-person-fill" style="font-size: 80px; color: #6c757d;"></i>
+                        </div>
+                        {% if user.is_authenticated %}
+                            <h4 class="mt-3">{{ user.get_full_name|default:user.username }}</h4>
+                            <p class="text-muted">@{{ user.username }}</p>
+                        {% endif %}
+                    </div>
+
+                    <!-- Статистика -->
+                    <div class="row text-center">
+                        <div class="col-6">
+                            <div class="stat-item">
+                                <h5 class="mb-0">0</h5>
+                                <small class="text-muted">Мероприятий</small>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="stat-item">
+                                <h5 class="mb-0">0</h5>
+                                <small class="text-muted">Отзывов</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="{% url 'users:logout' %}" class="btn btn-outline-danger btn-sm w-100">
+                        <i class="bi bi-box-arrow-right me-1"></i>Выйти
+                    </a>
+                </div>
+            </div>
+
+            <!-- Навигация -->
+            <div class="card mt-3">
+                <div class="list-group list-group-flush">
+                    <a href="{% url 'users:profile' %}" class="list-group-item list-group-item-action active">
+                        <i class="bi bi-person me-2"></i>Личные данные
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <i class="bi bi-calendar-event me-2"></i>Мои мероприятия
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <i class="bi bi-heart me-2"></i>Избранное
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <i class="bi bi-gear me-2"></i>Настройки
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Правая колонка - Форма редактирования -->
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="bi bi-pencil-square me-2"></i>Редактировать профиль</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        {% if form.errors %}
+                        <div class="alert alert-danger alert-dismissible fade show mb-4" role="alert">
+                            <i class="bi bi-exclamation-triangle me-2"></i>Пожалуйста, исправьте ошибки ниже.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        {% endif %}
+
+                        <!-- Основная информация -->
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="id_first_name" class="form-label">Имя</label>
+                                    <input type="text" class="form-control" id="id_first_name"
+                                           name="first_name" value="{{ user.first_name|default:'' }}"
+                                           placeholder="Введите ваше имя">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="id_last_name" class="form-label">Фамилия</label>
+                                    <input type="text" class="form-control" id="id_last_name"
+                                           name="last_name" value="{{ user.last_name|default:'' }}"
+                                           placeholder="Введите вашу фамилию">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Контактная информация -->
+                        <div class="mb-4">
+                            <h6 class="border-bottom pb-2">Контактная информация</h6>
+                            <div class="form-group mb-3">
+                                <label for="id_email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="id_email"
+                                       name="email" value="{{ user.email|default:'' }}"
+                                       placeholder="Введите ваш email">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="id_phone" class="form-label">Телефон</label>
+                                <input type="tel" class="form-control" id="id_phone"
+                                       name="phone" placeholder="+7 (999) 999-99-99">
+                            </div>
+                        </div>
+
+                        <!-- О себе -->
+                        <div class="mb-4">
+                            <h6 class="border-bottom pb-2">О себе</h6>
+                            <div class="form-group">
+                                <label for="id_bio" class="form-label">Биография</label>
+                                <textarea class="form-control" id="id_bio" name="bio"
+                                          rows="4" placeholder="Расскажите немного о себе..."></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Кнопки сохранения -->
+                        <div class="d-flex justify-content-between">
+                            <a href="{% url 'events:index' %}" class="btn btn-outline-secondary">
+                                <i class="bi bi-arrow-left me-1"></i>Назад
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-check-circle me-1"></i>Сохранить изменения
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Блок смены пароля -->
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="bi bi-shield-lock me-2"></i>Безопасность</h5>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted mb-3">Измените ваш пароль для повышения безопасности аккаунта.</p>
+                    <a href="#" class="btn btn-outline-primary">
+                        <i class="bi bi-key me-1"></i>Сменить пароль
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

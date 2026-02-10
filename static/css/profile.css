@@ -1,0 +1,259 @@
+/* profile.css */
+
+/* Стили для профиля */
+.profile-container {
+    padding: 2rem 0;
+}
+
+.bg-custom-green {
+    background: linear-gradient(135deg, #2a6e3f 0%, #4a9e5d 100%) !important;
+}
+
+/* Аватар пользователя */
+.avatar-container {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.avatar-placeholder {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: #f8f9fa;
+    border: 3px solid #dee2e6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    transition: all 0.3s ease;
+}
+
+.avatar-placeholder:hover {
+    border-color: #2a6e3f; /* Зеленый вместо синего */
+    transform: scale(1.05);
+}
+
+.avatar-icon {
+    font-size: 80px;
+    color: #6c757d;
+}
+
+.user-name {
+    margin-top: 1rem;
+    color: #333;
+}
+
+.user-username {
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+/* Статистика */
+.stats-container {
+    margin: 1.5rem 0;
+    padding: 1rem 0;
+    border-top: 1px solid #eaeaea;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.stat-item {
+    padding: 10px;
+    text-align: center;
+}
+
+.stat-number {
+    color: #2a6e3f; /* Темно-зеленый вместо синего */
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+}
+
+.stat-label {
+    color: #6c757d;
+    font-size: 0.85rem;
+}
+
+/* Навигация */
+.profile-nav .list-group-item {
+    border: none;
+    border-left: 3px solid transparent;
+    padding: 0.75rem 1rem;
+    color: #495057;
+    background-color: transparent;
+    transition: all 0.2s ease;
+}
+
+.profile-nav .list-group-item:hover {
+    background-color: #f8f9fa;
+    border-left-color: #2a6e3f; /* Зеленый вместо синего */
+    color: #2a6e3f; /* Зеленый вместо синего */
+}
+
+.profile-nav .list-group-item.active {
+    background-color: rgba(42, 110, 63, 0.1); /* Зеленый с прозрачностью */
+    border-left-color: #2a6e3f; /* Зеленый вместо синего */
+    color: #2a6e3f; /* Зеленый вместо синего */
+    font-weight: 500;
+}
+
+.profile-nav .list-group-item i {
+    width: 20px;
+    text-align: center;
+}
+
+/* Карточки профиля */
+.profile-card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    margin-bottom: 1.5rem;
+    transition: transform 0.2s ease;
+}
+
+.profile-card:hover {
+    transform: translateY(-2px);
+}
+
+.profile-card .card-header {
+    background-color: #fff;
+    border-bottom: 1px solid #eaeaea;
+    font-weight: 600;
+    color: #333;
+    padding: 1rem 1.25rem;
+}
+
+.profile-card .card-body {
+    padding: 1.5rem;
+}
+
+/* Форма */
+.profile-form .form-label {
+    font-weight: 500;
+    color: #495057;
+    margin-bottom: 0.5rem;
+}
+
+.profile-form .form-control {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 0.75rem;
+    transition: all 0.3s ease;
+}
+
+.profile-form .form-control:focus {
+    border-color: #2a6e3f; /* Зеленый вместо синего */
+    box-shadow: 0 0 0 0.2rem rgba(42, 110, 63, 0.25); /* Зеленый вместо синего */
+}
+
+.profile-form .section-title {
+    color: #333;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+/* Кнопки */
+.btn-profile {
+    padding: 0.5rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-logout {
+    border: 1px solid #dc3545;
+    color: #dc3545;
+}
+
+.btn-logout:hover {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-save {
+    background-color: #2a6e3f; /* Темно-зеленый вместо синего */
+    color: white;
+}
+
+.btn-save:hover {
+    background-color: #1e5430; /* Темнее зеленый */
+    transform: translateY(-1px);
+}
+
+.btn-change-password {
+    border: 1px solid #2a6e3f; /* Зеленый вместо синего */
+    color: #2a6e3f; /* Зеленый вместо синего */
+}
+
+.btn-change-password:hover {
+    background-color: #2a6e3f; /* Зеленый вместо синего */
+    color: white;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .profile-container {
+        padding: 1rem 0;
+    }
+
+    .avatar-placeholder {
+        width: 100px;
+        height: 100px;
+    }
+
+    .avatar-icon {
+        font-size: 60px;
+    }
+
+    .profile-card {
+        margin-bottom: 1rem;
+    }
+}
+
+/* Дополнительные зеленые стили для согласованности с дизайном */
+.profile-card .card-header.bg-primary {
+    background-color: #2a6e3f !important; /* Темно-зеленый */
+    color: white;
+}
+
+.profile-card .card-header {
+    color: #2a6e3f; /* Зеленый для заголовков */
+}
+
+.btn-primary {
+    background-color: #2a6e3f; /* Основной зеленый */
+    border-color: #2a6e3f;
+}
+
+.btn-primary:hover {
+    background-color: #1e5430; /* Темнее зеленый */
+    border-color: #1e5430;
+}
+
+.btn-outline-primary {
+    color: #2a6e3f; /* Зеленый текст */
+    border-color: #2a6e3f; /* Зеленая рамка */
+}
+
+.btn-outline-primary:hover {
+    background-color: #2a6e3f; /* Зеленый фон при наведении */
+    color: white;
+    border-color: #2a6e3f;
+}
+
+/* Цвета ссылок */
+a.auth-link, a.nav-link {
+    color: #2a6e3f; /* Зеленые ссылки */
+}
+
+a.auth-link:hover, a.nav-link:hover {
+    color: #1e5430; /* Темнее зеленый при наведении */
+}
+
+/* Активные элементы */
+.list-group-item.active {
+    background-color: rgba(42, 110, 63, 0.1); /* Светло-зеленый фон */
+    border-color: #2a6e3f; /* Зеленая граница */
+    color: #2a6e3f; /* Зеленый текст */
+}

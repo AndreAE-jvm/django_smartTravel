@@ -5,7 +5,7 @@
 
 
 <!-- Кастомные стили для форм авторизации -->
-{% block auth_css %}
+{% block css %}
 <link rel="stylesheet" href="{% static 'css/auth_new.css' %}">
 {% endblock %}
 
@@ -20,6 +20,21 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7 col-xxl-6">
+
+                {% if form.errors or messages %}
+                <div class="alert {% if messages %} alert-success {% else %} alert-danger alert-dismissible fade show {% endif %}"
+                     role="alert"
+                     style="margin-top: 10px;">
+                    {% if messages %}
+                        {% for msg in messages %}
+                            {{ msg }}
+                        {% endfor %}
+                    {% else %}
+                        {{ form.non_field_errors }}
+                    {% endif %}
+                </div>
+                {% endif %}
+
                 <div class="card auth-card mt-5 mb-5">
                     <div class="card-header auth-header text-center text-white">
                         <h4 class="mb-0"><i class="bi bi-box-arrow-in-right me-2"></i>Авторизация</h4>

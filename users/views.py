@@ -1,7 +1,10 @@
-from django.contrib import auth
+from django.contrib import auth, messages
 from django.shortcuts import render, HttpResponseRedirect
-from users.forms import UserLoginForm
+from users.forms import UserLoginForm, UserRegisterForm
 from django.urls import reverse
+
+
+
 
 def login(request):
     if request.method == 'POST':
@@ -22,4 +25,33 @@ def login(request):
     return render(request, 'users/login.html', context)
 
 def register(request):
-    return render(request, 'users/register.html')
+    if request.method == 'POST':
+        form = UserRegisterForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Регистрация прошла успешно! Теперь Вы можете войти.')
+            return HttpResponseRedirect(reverse('users:login'))
+        else:
+            print(form.errors)
+    else:
+        form = UserRegisterForm()
+
+    context = {
+        'form': form
+    }
+
+    return render(request, 'users/register.html', context)
+
+def logout(request):
+    auth.logout(request)
+    messages.success(request, 'Вы успешно вышли из системы. Возвращайтесь снова!')
+    return HttpResponseRedirect(reverse('index'))
+
+
+def profile(request):
+    """Страница профиля пользователя"""
+    context = {
+        'title': 'Мой профиль',
+        'user': request.user,
+    }
+    return render(request, 'users/profile.html', context)
