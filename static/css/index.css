@@ -42,19 +42,19 @@ body {
 
 /* Слайд 1 */
 .bg-slide:nth-child(1) {
-    background-image: url('/static/img/t.jpg');
+    background-image: url('/static/img/slides/t.jpg');
     animation-delay: 0s;
 }
 
 /* Слайд 2 */
 .bg-slide:nth-child(2) {
-    background-image: url('/static/img/t2.jpg');
+    background-image: url('/static/img/slides/t2.jpg');
     animation-delay: 8s;
 }
 
 /* Слайд 3 */
 .bg-slide:nth-child(3) {
-    background-image: url('/static/img/t3.jpg');
+    background-image: url('/static/img/slides/t3.jpg');
     animation-delay: 16s;
 }
 
